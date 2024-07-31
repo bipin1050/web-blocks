@@ -1,22 +1,26 @@
-# -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
+from odoo.http import request
 
 
-# class WebBlocks(http.Controller):
-#     @http.route('/web_blocks/web_blocks', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class ProductFilter(http.Controller):
 
-#     @http.route('/web_blocks/web_blocks/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('web_blocks.listing', {
-#             'root': '/web_blocks/web_blocks',
-#             'objects': http.request.env['web_blocks.web_blocks'].search([]),
-#         })
+    @http.route('/shop/filter', type='http', auth="public", website=True)
+    def filter_products(self, **kwargs):
+        category_id = kwargs.get('category')
+        type = kwargs.get('type')
+        name = kwargs.get('name')
 
-#     @http.route('/web_blocks/web_blocks/objects/<model("web_blocks.web_blocks"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('web_blocks.object', {
-#             'object': obj
-#         })
+        domain = []
+        if category_id:
+            domain.append(('categ_id', '=', int(category_id)))
+        if type:
+            domain.append(('type', '=', type))
+        if name:
+            domain.append(('name', 'ilike', name))
 
+        products = request.env['product.template'].sudo().search(domain)
+        values = {
+            'products': products,
+            'page_name': 'filtered_products',
+        }
+        return request.render("web_blocks.filter_product_option", values)
