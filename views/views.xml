@@ -2,9 +2,9 @@
   <data>
     <!-- explicit list view definition -->
 <!--
-    <record model="ir.ui.view" id="web-blocks.list">
-      <field name="name">web-blocks list</field>
-      <field name="model">web-blocks.web-blocks</field>
+    <record model="ir.ui.view" id="web_blocks.list">
+      <field name="name">web_blocks list</field>
+      <field name="model">web_blocks.web_blocks</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
@@ -17,18 +17,18 @@
 
     <!-- actions opening views on models -->
 <!--
-    <record model="ir.actions.act_window" id="web-blocks.action_window">
-      <field name="name">web-blocks window</field>
-      <field name="res_model">web-blocks.web-blocks</field>
+    <record model="ir.actions.act_window" id="web_blocks.action_window">
+      <field name="name">web_blocks window</field>
+      <field name="res_model">web_blocks.web_blocks</field>
       <field name="view_mode">tree,form</field>
     </record>
 -->
 
     <!-- server action to the one above -->
 <!--
-    <record model="ir.actions.server" id="web-blocks.action_server">
-      <field name="name">web-blocks server</field>
-      <field name="model_id" ref="model_web-blocks_web-blocks"/>
+    <record model="ir.actions.server" id="web_blocks.action_server">
+      <field name="name">web_blocks server</field>
+      <field name="model_id" ref="model_web_blocks_web_blocks"/>
       <field name="state">code</field>
       <field name="code">
         action = {
@@ -42,19 +42,19 @@
 
     <!-- Top menu item -->
 <!--
-    <menuitem name="web-blocks" id="web-blocks.menu_root"/>
+    <menuitem name="web_blocks" id="web_blocks.menu_root"/>
 -->
     <!-- menu categories -->
 <!--
-    <menuitem name="Menu 1" id="web-blocks.menu_1" parent="web-blocks.menu_root"/>
-    <menuitem name="Menu 2" id="web-blocks.menu_2" parent="web-blocks.menu_root"/>
+    <menuitem name="Menu 1" id="web_blocks.menu_1" parent="web_blocks.menu_root"/>
+    <menuitem name="Menu 2" id="web_blocks.menu_2" parent="web_blocks.menu_root"/>
 -->
     <!-- actions -->
 <!--
-    <menuitem name="List" id="web-blocks.menu_1_list" parent="web-blocks.menu_1"
-              action="web-blocks.action_window"/>
-    <menuitem name="Server to list" id="web-blocks" parent="web-blocks.menu_2"
-              action="web-blocks.action_server"/>
+    <menuitem name="List" id="web_blocks.menu_1_list" parent="web_blocks.menu_1"
+              action="web_blocks.action_window"/>
+    <menuitem name="Server to list" id="web_blocks" parent="web_blocks.menu_2"
+              action="web_blocks.action_server"/>
 -->
   </data>
 </odoo>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "web-blocks",
+    'name': "web_blocks",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 

@@ -2,21 +2,21 @@
 # from odoo import http
 
 
-# class Web-blocks(http.Controller):
-#     @http.route('/web-blocks/web-blocks', auth='public')
+# class WebBlocks(http.Controller):
+#     @http.route('/web_blocks/web_blocks', auth='public')
 #     def index(self, **kw):
 #         return "Hello, world"
 
-#     @http.route('/web-blocks/web-blocks/objects', auth='public')
+#     @http.route('/web_blocks/web_blocks/objects', auth='public')
 #     def list(self, **kw):
-#         return http.request.render('web-blocks.listing', {
-#             'root': '/web-blocks/web-blocks',
-#             'objects': http.request.env['web-blocks.web-blocks'].search([]),
+#         return http.request.render('web_blocks.listing', {
+#             'root': '/web_blocks/web_blocks',
+#             'objects': http.request.env['web_blocks.web_blocks'].search([]),
 #         })
 
-#     @http.route('/web-blocks/web-blocks/objects/<model("web-blocks.web-blocks"):obj>', auth='public')
+#     @http.route('/web_blocks/web_blocks/objects/<model("web_blocks.web_blocks"):obj>', auth='public')
 #     def object(self, obj, **kw):
-#         return http.request.render('web-blocks.object', {
+#         return http.request.render('web_blocks.object', {
 #             'object': obj
 #         })
 

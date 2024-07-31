@@ -3,9 +3,9 @@
 # from odoo import models, fields, api
 
 
-# class web-blocks(models.Model):
-#     _name = 'web-blocks.web-blocks'
-#     _description = 'web-blocks.web-blocks'
+# class web_blocks(models.Model):
+#     _name = 'web_blocks.web_blocks'
+#     _description = 'web_blocks.web_blocks'
 
 #     name = fields.Char()
 #     value = fields.Integer()
