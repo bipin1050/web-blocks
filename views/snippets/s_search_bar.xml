@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <template id="search_product_option" name="Product Search Bar">
-            <section class="pt40 pb49">
-                <div class="container">
-                    <h1 class="text-center">Search Products</h1>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <select id="car_name" class="form-control"></select>
-                        </div>
-                        <div class="col-md-4">
-                            <select id="year_model" class="form-control"></select>
-                        </div>
-                        <div class="col-md-4">
-                            <select id="available_parts" class="form-control"></select>
-                        </div>
+    <template id="s_search_bar" name="Product Search Bar">
+        <section class="js_search_bar pt40 pb49">
+            <div class="container">
+                <h1 class="text-center">Search Products</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select id="car_name" class="form-control">
+                            <option value="">Select Car</option>
+                        </select>
                     </div>
+                    <!-- <div class="col-md-4">
+                        <select id="year_model" class="form-control"></select>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="available_parts" class="form-control"></select>
+                    </div> -->
                 </div>
-            </section>
-        </template>
+            </div>
+        </section>
+    </template>
 
-        <template id="snippets" inherit_id="website.snippets">
-            <xpath expr="//t[@t-snippet='website.s_banner']" position="before">
-                <t t-snippet="web_blocks.search_product_option" string="Search Product"/>
-            </xpath>
-        </template>
-    </data>
+    <template id="snippet_search_bar" inherit_id="website.snippets" name="Search Bar Snippet">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="web_blocks.s_search_bar"
+               t-thumbnail="/web_blocks/static/src/img/snippets/search_bar.png"/>
+        </xpath>
+    </template>
 </odoo>
