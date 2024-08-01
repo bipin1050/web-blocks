@@ -5,7 +5,6 @@ class WebBlocks(http.Controller):
 
     @http.route('/web_blocks/get_filter_data', type='json', auth='public')
     def get_filter_data(self):
-        # This is a sample data structure
         data = [
             {
                 "Audi": {
