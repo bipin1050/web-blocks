@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="filter_product_template" name="Filter Product Template">
+        <section class="s_product_filter js_product_filter" data-name="Product Filter">
+            <div class="container">
+                <h1 class="text-center">Filter Products</h1>
+                <form action="/shop/filter" method="get" class="text-center">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <select name="category" class="form-control mb-3 category-select">
+                                <option value="">Select Category</option>
+                                <!-- Categories will be populated by JS -->
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <select name="type" class="form-control mb-3 type-select">
+                                <option value="">Select Type</option>
+                                <!-- Types will be populated by JS -->
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="name" placeholder="Product Name" class="form-control mb-3"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
+            </div>
+        </section>
+    </template>
+
+    <!-- Add snippet to the website snippets bar -->
+    <template id="snippets" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="web_blocks.filter_product_template"/>
+        </xpath>
+    </template>
+</odoo>

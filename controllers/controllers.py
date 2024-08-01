@@ -1,26 +1,32 @@
+import logging
 from odoo import http
 from odoo.http import request
 
+_logger = logging.getLogger(__name__)
 
-class ProductFilter(http.Controller):
 
-    @http.route('/shop/filter', type='http', auth="public", website=True)
-    def filter_products(self, **kwargs):
-        category_id = kwargs.get('category')
-        type = kwargs.get('type')
-        name = kwargs.get('name')
+class ProductFilterController(http.Controller):
 
-        domain = []
-        if category_id:
-            domain.append(('categ_id', '=', int(category_id)))
-        if type:
-            domain.append(('type', '=', type))
-        if name:
-            domain.append(('name', 'ilike', name))
+    @http.route('/product/filter/data', type='json', auth="public", website=True)
+    def get_filter_data(self, **kwargs):
+        # Fetch product categories
+        category_model = request.env['product.category'].sudo()
+        categories = category_model.search_read([], ['id', 'name'])
 
-        products = request.env['product.template'].sudo().search(domain)
-        values = {
-            'products': products,
-            'page_name': 'filtered_products',
+        # Fetch product templates and their types
+        template_model = request.env['product.template'].sudo()
+        product_templates = template_model.search_read([], ['type'])
+
+        # Log fetched data
+        _logger.info('Fetched Categories: %s', categories)
+        _logger.info('Fetched Product Templates: %s', product_templates)
+
+        # Extract unique product types
+        types = list(set(pt['type'] for pt in product_templates if pt['type']))
+
+        response_data = {
+            'categories': categories,
+            'types': [{'id': t, 'name': t} for t in types]
         }
-        return request.render("web_blocks.filter_product_option", values)
+
+        return response_data
