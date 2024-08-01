@@ -1,22 +1,41 @@
-# -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
+from odoo.http import request
 
+class WebBlocks(http.Controller):
 
-# class WebBlocks(http.Controller):
-#     @http.route('/web_blocks/web_blocks', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
-
-#     @http.route('/web_blocks/web_blocks/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('web_blocks.listing', {
-#             'root': '/web_blocks/web_blocks',
-#             'objects': http.request.env['web_blocks.web_blocks'].search([]),
-#         })
-
-#     @http.route('/web_blocks/web_blocks/objects/<model("web_blocks.web_blocks"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('web_blocks.object', {
-#             'object': obj
-#         })
-
+    @http.route('/web_blocks/get_filter_data', type='json', auth='public')
+    def get_filter_data(self):
+        # This is a sample data structure
+        data = [
+            {
+                "Audi": {
+                    "2000": {
+                        "Silencer": {
+                            "price": 5000,
+                            "warranty": "2 years"
+                        },
+                        "Engine": {
+                            "price": 15000,
+                            "warranty": "5 years"
+                        }
+                    },
+                    "2021": {
+                        "Tire": {
+                            "price": 200,
+                            "warranty": "1 year"
+                        }
+                    }
+                }
+            },
+            {
+                "BMW": {
+                    "2010": {
+                        "Gearbox": {
+                            "price": 7000,
+                            "warranty": "3 years"
+                        }
+                    }
+                }
+            }
+        ]
+        return data

@@ -27,6 +27,11 @@ Long description of module's purpose
         'views/views.xml',
         'views/templates.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'web_blocks/static/src/js/snippets/s_search_bar/000.js',
+        ],
+    },
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
