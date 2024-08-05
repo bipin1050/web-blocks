@@ -15,14 +15,16 @@ const SearchBarSnippet = publicWidget.Widget.extend({
     this._fetchData();
     return def;
   },
+
   _fetchData: function () {
     var self = this;
-    return jsonrpc("/web_blocks/get_filter_data",{})
+    return jsonrpc("/web_blocks/get_filter_data", {})
       .then(function (data) {
         self.data = data;
         self._populateCarOptions();
       });
   },
+
   _populateCarOptions: function () {
     const carSelect = this.el.querySelector("#car_name");
     carSelect.innerHTML = '<option value="">Select Car</option>';
@@ -44,9 +46,7 @@ const SearchBarSnippet = publicWidget.Widget.extend({
     partSelect.innerHTML = '<option value="">Select Part</option>';
 
     if (carName) {
-      const carData = this.data.find((car) => car.hasOwnProperty(carName))[
-        carName
-      ];
+      const carData = this.data.find((car) => car.hasOwnProperty(carName))[carName];
       Object.keys(carData).forEach((model) => {
         const option = document.createElement("option");
         option.value = model;
@@ -70,9 +70,7 @@ const SearchBarSnippet = publicWidget.Widget.extend({
     partSelect.innerHTML = '<option value="">Select Part</option>';
 
     if (modelName) {
-      const carData = this.data.find((car) => car.hasOwnProperty(carName))[
-        carName
-      ];
+      const carData = this.data.find((car) => car.hasOwnProperty(carName))[carName];
       const modelData = carData[modelName];
       Object.keys(modelData).forEach((part) => {
         const option = document.createElement("option");
@@ -93,17 +91,15 @@ const SearchBarSnippet = publicWidget.Widget.extend({
     const partName = ev.target.value;
 
     if (partName) {
-      const carData = this.data.find((car) => car.hasOwnProperty(carName))[
-        carName
-      ];
+      const carData = this.data.find((car) => car.hasOwnProperty(carName))[carName];
       const modelData = carData[modelName];
       const partData = modelData[partName];
 
       const detailsHtml = `
-                <h3>Part Details:</h3>
-                <p>Price: $${partData.price}</p>
-                <p>Warranty: ${partData.warranty}</p>
-            `;
+        <h3>Part Details:</h3>
+        <p>Price: $${partData.price}</p>
+        <p>Description: ${partData.description}</p>
+      `;
       this.el.querySelector("#part_details").innerHTML = detailsHtml;
     } else {
       this.el.querySelector("#part_details").innerHTML = "";

@@ -5,36 +5,26 @@ class WebBlocks(http.Controller):
 
     @http.route('/web_blocks/get_filter_data', type='json', auth='public')
     def get_filter_data(self):
-        data = [
-            {
-                "Audi": {
-                    "2000": {
-                        "Silencer": {
-                            "price": 5000,
-                            "warranty": "2 years"
-                        },
-                        "Engine": {
-                            "price": 15000,
-                            "warranty": "5 years"
-                        }
-                    },
-                    "2021": {
-                        "Tire": {
-                            "price": 200,
-                            "warranty": "1 year"
-                        }
+        Category = request.env['product.category']
+        Product = request.env['product.template']
+
+        # Fetch parent categories (those without a parent_id)
+        parent_categories = Category.search([('parent_id', '=', False)])
+
+        data = []
+        for parent in parent_categories:
+            parent_dict = {parent.name: {}}
+            # Fetch subcategories for each parent category
+            subcategories = Category.search([('parent_id', '=', parent.id)])
+            for subcategory in subcategories:
+                subcategory_dict = {}
+                # Fetch products for each subcategory
+                products = Product.search([('categ_id', '=', subcategory.id)])
+                for product in products:
+                    subcategory_dict[product.name] = {
+                        "price": product.list_price,
                     }
-                }
-            },
-            {
-                "BMW": {
-                    "2010": {
-                        "Gearbox": {
-                            "price": 7000,
-                            "warranty": "3 years"
-                        }
-                    }
-                }
-            }
-        ]
+                parent_dict[parent.name][subcategory.name] = subcategory_dict
+            data.append(parent_dict)
+
         return data
